@@ -79,8 +79,12 @@ INTERNAL_IPS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'storefront',
+        'USER': 'root',
+        'PASSWORD': '202v202c',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

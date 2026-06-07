@@ -1,0 +1,33 @@
+# Virtual environment
+myenv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Environment variables
+.env
+
+# Database (IMPORTANT)
+db.sqlite3
+*.sql
+*.dump
+*.sqlite3
+
+# Django stuff (optional but recommended)
+media/
+staticfiles/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

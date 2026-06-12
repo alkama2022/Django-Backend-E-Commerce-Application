@@ -9,5 +9,5 @@ admin.site.index_title = 'Admin'
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('__debug__/', include(debug_toolbar_urls)),
-    path('', include('playground.urls')),
+    path('', include('store.urls')),
 ] + debug_toolbar_urls()

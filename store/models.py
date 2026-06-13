@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator,MinLengthValidator
+from uuid import uuid4
 # Create your models here.
 
 class Promotion(models.Model):
@@ -82,6 +83,7 @@ class Address(models.Model):
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
 
 class Cart(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid4)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class CartItem(models.Model):
@@ -89,6 +91,8 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField()
     
+    class Meta:
+        unique_together =[['cart','product']]
 
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')

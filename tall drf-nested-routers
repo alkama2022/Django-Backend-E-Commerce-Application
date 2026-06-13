@@ -1,0 +1,149 @@
+[33mcommit 456775a6f48def0b90f1a90e2cce25285de6c853[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 15:33:26 2026 +0100
+
+    Foundations for Creating Nested Routers
+
+[33mcommit 2e52d3c8e4eb005e86c5089c91923093d52f2395[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 15:29:42 2026 +0100
+
+    Creating Review Model for Product Review Resources
+
+[33mcommit 53cf94813a4fc97a49b6ed1f3b739847d91ecb2e[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 15:23:52 2026 +0100
+
+    Routers
+
+[33mcommit 86afc71f55fbdd7152683413b5007f643a308f42[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 15:17:37 2026 +0100
+
+    API Routers To manage and Control Url call
+
+[33mcommit d9c12dcc3377a061059b9fd217437cad76b19545[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 15:01:49 2026 +0100
+
+    ModelViewSet To Help Us to not repeat ourseves
+
+[33mcommit 70dc67fb84da0964af10a44732989dfbbcbb7ec7[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 14:39:09 2026 +0100
+
+    creating generic view with ListCreateModelMixins and RetrivedUpdateDestroyModelMixins:
+
+[33mcommit 304069e0b271495d1ed83f5941de8ac11bdb614c[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 14:17:16 2026 +0100
+
+    API Class Base View with APIWiew module from rest_framework.views
+
+[33mcommit 2dacc288f5b9c77262f7df2228aaad9f60679f72[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 13:03:06 2026 +0100
+
+    inplementing collection API with function base view
+
+[33mcommit d61912f9b606e21af24b0bfefcd12012c9884808[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sat Jun 13 12:26:30 2026 +0100
+
+    creating serializers
+
+[33mcommit af6b3c06cf3f87f7971e94440f361299ab2c9bca[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Fri Jun 12 22:34:21 2026 +0100
+
+    installing rest framework
+
+[33mcommit 6d595ff3c708486a4b4013297fb3435167b0358e[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Mon Jun 8 20:37:21 2026 +0100
+
+    Creating and setting up model and admin
+
+[33mcommit f5ea011a62e3a2c444ca9c7586fb82ebe2bf6822[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 18:56:15 2026 +0100
+
+    views.py
+
+[33mcommit 57dee89ad28906a98b440a4f2d29622e66620596[m[33m ([m[1;32magents/apply-file-styling[m[33m)[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 18:01:44 2026 +0100
+
+    setting up mysql database
+
+[33mcommit 0c5fafbcc265ab95059d54ad248dd213e74a7757[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 17:42:19 2026 +0100
+
+    slug
+
+[33mcommit 3c7097811d9ed2f33bd7a02048c1f4e099218a61[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 17:23:29 2026 +0100
+
+    creating and applying migrations
+
+[33mcommit 7c674c99d88c9df3fccf89eb3d8cb4c8c429fff7[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 17:19:40 2026 +0100
+
+    creating likes app and it's model class and relationships
+
+[33mcommit 482c24276b1bf5fd2687386681cbfd1a27fd31fc[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 17:12:09 2026 +0100
+
+    Generic Relationships
+
+[33mcommit ac72458a1d39b37e929ccfb0a697e310822344f0[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 16:04:58 2026 +0100
+
+    Resulving circuler dependency
+
+[33mcommit fa07f48db17bf09cc7b29efc89f4800466c94084[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 15:57:59 2026 +0100
+
+    Creating relationships b/t two models
+
+[33mcommit f8c31403bc14b189c7c58f7af1303463e4f6a124[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 15:45:09 2026 +0100
+
+    creating Choices field
+
+[33mcommit c7a7c1d23f0f55aaac624ed2baadcb6d148ee5aa[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 15:38:48 2026 +0100
+
+    creating models classess Product and Customer to Store APP,
+
+[33mcommit e19fc58c0458637f557f48641f3d53f24dd425e2[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 15:31:50 2026 +0100
+
+    creating 2 apps store and tags
+
+[33mcommit 5029f15b0264a9d5a488f0b9be740a4a3c0a64af[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 15:22:30 2026 +0100
+
+    Creating templates,migrating database and troubling some issues in order to check whether my django toolbar have install successcifully
+
+[33mcommit 570554fc99287e200d33391bed98389d3ff63208[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 15:06:02 2026 +0100
+
+    Adding Django Toolbar to my file for debuging purpose:
+
+[33mcommit c387c5b82fb84973b5f7068462ed2b1430ed7416[m
+Author: Alkama Umar Liman <alkalineumarliman@gmail.com>
+Date:   Sun Jun 7 12:19:07 2026 +0100
+
+    first commit

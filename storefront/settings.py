@@ -129,5 +129,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 REST_FRAMEWORK = {
-    'COERCE_DECIMAL_TO_STRING' : False
+    'COERCE_DECIMAL_TO_STRING' : False,
+    'PAGE_SIZE' : 3
 }

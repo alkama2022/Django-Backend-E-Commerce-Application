@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from store.serializers import ProductSerializer,CollectionSerializers
-from .models import Product,Collection
+from .models import OrderItem, Product,Collection
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
@@ -12,15 +12,18 @@ class ProductViewSet(ModelViewSet):
     def get_serializer_context(self):
         return {'request': self.request}
     
-    def destroy(self,request,pk):
-        if Product.objects.filter(collection_id=pk).count() > 0:
-            return Response({'error': 'Collection cannot be deleted because it includes one or more products.'}, status=status.HTTP_400_BAD_REQUEST)
-
+    def destroy(self,request,*args,**kwargs):
+        if OrderItem.objects.filter(product_id=kwargs['pk']).count() > 0:
+            return Response({'error': 'Product cannot be deleted because it is associated with one or more order items.'}, status=status.HTTP_400_BAD_REQUEST)
+        return super().destroy(request,*args,**kwargs)
+    
 class CollectionViewSet(ModelViewSet):
     queryset = Collection.objects.annotate(products_count=Count('product')).all()
     serializer_class = CollectionSerializers
     def get_serializer_context(self):
         return {'request': self.request}
-    def destroy(self,request,pk):
-        if Product.objects.filter(collection_id=pk).count() > 0:
+    
+    def destroy(self,request,*args,**kwargs):
+        if Product.objects.filter(collection_id=kwargs['pk']).count() > 0:
             return Response({'error': 'Collection cannot be deleted because it includes one or more products.'}, status=status.HTTP_400_BAD_REQUEST)
+        return super().destroy(request,*args,**kwargs)

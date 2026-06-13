@@ -18,3 +18,10 @@ class ProductSerializer(serializers.ModelSerializer):
   collection = serializers.PrimaryKeyRelatedField(queryset=models.Collection.objects.all())
   def calculate_tax(self,product:models.Product):
       return product.price * Decimal(1.04)
+    
+
+class ReviewSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = models.Review
+    fields = ['id','created_at','name','description','product']
+  product = serializers.PrimaryKeyRelatedField(queryset=models.Product.objects.all())

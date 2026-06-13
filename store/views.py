@@ -12,7 +12,7 @@ class ProductViewSet(ModelViewSet):
     def get_serializer_context(self):
         return {'request': self.request}
     
-    def delete(self,request,pk):
+    def destroy(self,request,pk):
         if Product.objects.filter(collection_id=pk).count() > 0:
             return Response({'error': 'Collection cannot be deleted because it includes one or more products.'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -21,6 +21,6 @@ class CollectionViewSet(ModelViewSet):
     serializer_class = CollectionSerializers
     def get_serializer_context(self):
         return {'request': self.request}
-    def delete(self,request,pk):
+    def destroy(self,request,pk):
         if Product.objects.filter(collection_id=pk).count() > 0:
             return Response({'error': 'Collection cannot be deleted because it includes one or more products.'}, status=status.HTTP_400_BAD_REQUEST)

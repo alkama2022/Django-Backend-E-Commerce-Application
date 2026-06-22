@@ -7,7 +7,9 @@ from . import models
 class CollectionSerializer(serializers.ModelSerializer):
   class Meta:
     model = models.Collection
-    fields = ['id','title']
+    fields = ['id','title','products_count']
+  
+  products_count = serializers.IntegerField()
     
 class ProductSerilizer(serializers.ModelSerializer):
   price_with_text = serializers.SerializerMethodField(method_name='calculate_tex')

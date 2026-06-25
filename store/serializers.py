@@ -9,7 +9,7 @@ class CollectionSerializer(serializers.ModelSerializer):
     model = models.Collection
     fields = ['id','title','products_count']
   
-  products_count = serializers.IntegerField()
+  products_count = serializers.IntegerField(read_only = True)
     
 class ProductSerilizer(serializers.ModelSerializer):
   price_with_text = serializers.SerializerMethodField(method_name='calculate_tex')
@@ -20,4 +20,12 @@ class ProductSerilizer(serializers.ModelSerializer):
   class Meta:
     model = models.Product
     fields = ['id','title','slug','inventory','description','price','price_with_text','collection']
-    
+
+class ReviewSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = models.Review
+    fields = ['id','date','name','description']
+  
+  def create(self, validated_data):
+    product_id = self.context['product_id']
+    return models.Review.objects.create(product_id=product_id,**validated_data)

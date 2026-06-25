@@ -1,76 +1,42 @@
-from rest_framework.decorators import api_view,
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
-
+from rest_framework.viewsets import ModelViewSet
 from django.db.models import Count
-from django.shortcuts import get_object_or_404
 from . import models
 from . import serializers
 
-
-@api_view(['GET','POST'])
-def product_list(request):
-    if request.method == 'GET' :
-      product = models.Product.objects.select_related('collection').all()
-      serializer = serializers.ProductSerilizer(product, many = True,context={'request': request})
-      return Response(serializer.data)
-    elif request.method == "POST":
-      serializer = serializers.ProductSerilizer(data=request.data)
-      serializer.is_valid(raise_exception=True)
-      serializer.save()
-      return Response(serializer.data)
-
-
-
-@api_view(['GET','PUT','DELETE'])
-def product_detail(request,id):
-  product = get_object_or_404(models.Product,pk = id)
-  if request.method == 'GET':
-    serializer = serializers.ProductSerilizer(product)
-    return Response(serializer.data)
-  elif request.method == 'PUT':
-        serializer = serializers.ProductSerilizer(product,data = request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-  elif request.method == 'DELETE':
-    if product.orderitems.count() > 0 :
+class ProductViewSet(ModelViewSet):
+  queryset = models.Product.objects.all()
+  filter_backends = [DjangoFilterBackend]
+  filterset_fields = ['collection_id' , 'price']
+  serializer_class = serializers.ProductSerilizer  
+  
+  def get_serializer_context(self):
+     return {'request' : self.request}
+   
+  def destroy(self, request, *args, **kwargs):
+    if models.OrderItem.objects.filter(product_id = kwargs['pk']).count() > 0:
       return Response({"Error" : "Product Cannot be deleted becouse it is associated with order items"},status=405)
-    product.delete()
-    return Response(status=204)
+    return super().destroy(request, *args, **kwargs)
+  
+class CollectionViewSet(ModelViewSet):
+  queryset = models.Collection.objects.annotate(products_count=Count('products')).all()
+  serializer_class = serializers.CollectionSerializer
 
-@api_view()
-
-def collection_detail(request,pk):
-  collection = get_object_or_404(models.Collection,pk = pk)
-  serializer = serializers.CollectionSerializer(collection)
-  return Response(serializer.data)
-
-@api_view(['GET','POST'])
-def collection_list(request):
-    if request.method == 'GET' :
-      collection = models.Collection.objects.annotate(products_count=Count('products')).all()
-      serializer = serializers.CollectionSerializer(collection, many = True,context={'request': request})
-      return Response(serializer.data)
-    
-    elif request.method == "POST":
-      serializer = serializers.CollectionSerializer(data=request.data)
-      serializer.is_valid(raise_exception=True)
-      serializer.save()
-      return Response(serializer.data)
-
-@api_view(['GET','PUT','DELETE'])
-def collection_detail(request,id):
-  collection = get_object_or_404(models.Collection,pk = id)
-  if request.method == 'GET':
-    serializer = serializers.CollectionSerializer(collection)
-    return Response(serializer.data)
-  elif request.method == 'PUT':
-        serializer = serializers.CollectionSerializer(collection,data = request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-  elif request.method == 'DELETE':
-    if collection.products.count() > 0 :
+  def get_serializer_context(self):
+     return {'request' : self.request}
+   
+  def destroy(self, request, *args, **kwargs):
+    if models.Product.objects.filter(collection_id = kwargs['pk']).count() > 0:
       return Response({"Error" : "Collection Cannot be deleted becouse it is associated with order Product"},status=405)
-    collection.delete()
-    return Response(status=204)
+    return super().destroy(request, *args, **kwargs)
+
+class ReviewViewSet(ModelViewSet):
+  def get_queryset(self):
+    return models.Review.objects.filter(product_id = self.kwargs['product_pk'])
+ 
+  serializer_class = serializers.ReviewSerializer
+  
+  def get_serializer_context(self):
+    return {'request' : self.kwargs['product_pk']}
+  

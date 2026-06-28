@@ -50,20 +50,28 @@ class ReviewViewSet(ModelViewSet):
     return {'request' : self.kwargs['product_pk']}
 
 
-class CartViewSet(CreateModelMixin,RetrieveModelMixin,GenericViewSet):
-  queryset = models.Cart.objects.all()
+class CartViewSet(CreateModelMixin,
+                  RetrieveModelMixin,
+                  DestroyModelMixin,
+                  GenericViewSet):
+  queryset = models.Cart.objects.prefetch_related('items__product').all()
   serializer_class = serializers.CartSerializer
 
 class CartItemViewSet(ModelViewSet):
-  serializer_class = serializers.CartItemSerializer
+  http_method_names = ['get','post','patch','delete']
+  def get_serializer_class(self):
+   if self.request.method == 'PATCH':
+     return serializers.UpdateCartItemSerializer
+   return serializers.CartItemSerializer
+  
   def get_queryset(self):
     return models.CartItem.objects.filter(
-        cart_id=self.kwargs['carts_pk']
-    )
+        cart_id=self.kwargs['cart_pk']
+    ).select_related('product')
+    
   def get_serializer_context(self):
     return {
-        'cart_id': self.kwargs['carts_pk']
+        'cart_id': self.kwargs['cart_pk']
     }
   
   
-

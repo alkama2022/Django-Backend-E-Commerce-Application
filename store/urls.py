@@ -11,7 +11,7 @@ router.register('carts',views.CartViewSet)
 
 product_router = routers.NestedDefaultRouter(router,'products', lookup='product') # parents router
 
-cart_router = routers.NestedDefaultRouter(router,'carts',lookup = 'carts')
+cart_router = routers.NestedDefaultRouter(router,'carts',lookup = 'cart')
 
 product_router.register('reviews',views.ReviewViewSet,basename='product_reviews') #Chield Router
 cart_router.register('items',views.CartItemViewSet,basename='cart_items')

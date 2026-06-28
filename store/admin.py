@@ -52,11 +52,13 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
-  list_display = ('first_name','last_name','member_ship', 'customer_orders')
+  list_display = ('user__first_name','user__last_name','member_ship', 'customer_orders')
   list_editable = ('member_ship',)
   list_per_page = 5
-  ordering = ['first_name','last_name']
+  list_select_related = ['user']
+  ordering = ['user__first_name','user__last_name']
   search_fields = ['first_name__istartswith','last_name__istartswith']
+  
   
   
   def customer_orders(self,customer):

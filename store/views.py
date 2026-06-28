@@ -4,7 +4,9 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django.db.models import Count
+
 from .filters import ProductFilter
+from .pagination import DefaultPagination
 from . import models
 from . import serializers
 
@@ -12,6 +14,7 @@ class ProductViewSet(ModelViewSet):
   queryset = models.Product.objects.all()
   filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
   filterset_class = ProductFilter
+  pagination_class = DefaultPagination
   serializer_class = serializers.ProductSerilizer  
   search_fields = ['title','description']
   ordering_fields = ['price','last_update']

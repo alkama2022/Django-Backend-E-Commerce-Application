@@ -127,8 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
 REST_FRAMEWORK = {
-    'COERCE_DECIMAL_TO_STRING' : False,
-    'PAGE_SIZE' : 3
+    'COERCE_DECIMAL_TO_STRING': False,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 3,
 }

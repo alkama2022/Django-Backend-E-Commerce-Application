@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet,GenericViewSet
+from rest_framework.mixins import CreateModelMixin,UpdateModelMixin,DestroyModelMixin,RetrieveModelMixin
 from rest_framework import status
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django.db.models import Count
@@ -47,4 +48,15 @@ class ReviewViewSet(ModelViewSet):
   
   def get_serializer_context(self):
     return {'request' : self.kwargs['product_pk']}
-  
+
+
+class CartViewSet(CreateModelMixin,RetrieveModelMixin,GenericViewSet):
+  queryset = models.Cart.objects.all()
+  serializer_class = serializers.CartSerializer
+
+class CartItemViewSet(ModelViewSet):
+  queryset = models.CartItem.objects.all()
+  serializer_class = serializers.CartItemSerializer
+
+  def get_serializer_context(self):
+     return {'request' : self.request}

@@ -73,5 +73,7 @@ class CartItemViewSet(ModelViewSet):
     return {
         'cart_id': self.kwargs['cart_pk']
     }
-  
-  
+
+class CustomerViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,GenericViewSet):
+  queryset = models.Customer.objects.all()
+  serializer_class = serializers.CustomerSerializer

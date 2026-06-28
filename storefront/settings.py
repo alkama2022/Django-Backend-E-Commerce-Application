@@ -1,5 +1,5 @@
 
-
+from datetime import timedelta
 from pathlib import Path
 import os
 
@@ -144,6 +144,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1)
 }
 
 DJOSER = {

@@ -29,16 +29,40 @@ class ReviewSerializer(serializers.ModelSerializer):
   def create(self, validated_data):
     product_id = self.context['product_id']
     return models.Review.objects.create(product_id=product_id,**validated_data)
-
+class SimpleProductSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = models.Product
+    fields = ['id','title','price']
+    
+    
+    
+    
 class CartItemSerializer(serializers.ModelSerializer):
-
+    product = SimpleProductSerializer()
     class Meta:
         model = models.CartItem
-        fields = ['id', 'cart', 'product', 'quantity']
+        fields = ['id', 'product', 'quantity']
         
+    def create(self, validated_data):
+      cart_id = self.context['cart_id']
+      product = validated_data['product']
+      quantity = validated_data['quantity']
+      
+      item, created = models.CartItem.objects.get_or_create(
+        cart_id=cart_id,
+        product=product,
+        defaults={'quantity': quantity}
+    )
+      
+      if not created:
+        item.quantity += quantity
+        item.save()
+      
+      return item
+    
 class CartSerializer(serializers.ModelSerializer):
   id = serializers.UUIDField(read_only = True)
-  items = CartItemSerializer
+  items = CartItemSerializer(many = True, read_only=True)
   class Meta:
     model = models.Cart
     fields = ['id', 'items']

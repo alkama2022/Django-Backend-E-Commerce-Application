@@ -88,7 +88,48 @@ class UpdateCartItemSerializer(serializers.ModelSerializer):
     fields = ['quantity']
     
 class CustomerSerializer(serializers.ModelSerializer):
-  user_id = serializers.IntegerField()
+  user_id = serializers.IntegerField(read_only=True)
   class Meta:
     model = models.Customer
     fields = ['id','user_id','phone_number','birth_date','member_ship']
+
+class OrderItemSerialize(serializers.ModelSerializer):
+  product = SimpleProductSerializer()
+  # order_id = serializers.IntegerField()
+  class Meta:
+    model = models.OrderItem
+    fields = ['id','product','quantity','unit_price']
+              
+
+class OrderSerializer(serializers.ModelSerializer):
+  items = OrderItemSerialize(many=True)
+  class Meta:
+    model = models.Order
+    fields = ['id','customer','placed_at','payment_status','items']
+
+
+class CreateOrderSerializer(serializers.Serializer):
+  cart_id = serializers.UUIDField()
+  
+  def save(self, **kwargs):
+    customer = models.Customer.objects.get(user_id=self.context['user_id'])
+    order = models.Order.objects.create(customer=customer)
+
+    cart = models.Cart.objects.get(pk=self.validated_data['cart_id'])
+
+    cart_items = models.CartItem.objects.select_related('product').filter(cart=cart)
+
+    order_items = [
+        models.OrderItem(
+            order=order,
+            product=item.product,
+            quantity=item.quantity,
+            unit_price=item.product.unit_price
+        )
+        for item in cart_items
+    ]
+
+    models.OrderItem.objects.bulk_create(order_items)
+    cart.delete()
+
+    return order
